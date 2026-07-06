@@ -12,5 +12,28 @@ export const Media: CollectionConfig = {
       required: true,
     },
   ],
-  upload: true,
+  upload: {
+    // Explicit allow-list: standard image formats + 3D model formats
+    mimeTypes: ['image/*', 'model/gltf-binary', 'model/gltf+json', 'application/octet-stream'],
+    imageSizes: [
+      {
+        name: 'thumbnail',
+        width: 300,
+        height: 300,
+        position: 'centre',
+      },
+      {
+        name: 'card',
+        width: 600,
+        height: 600,
+        position: 'centre',
+      },
+      {
+        name: 'hero',
+        width: 1600,
+        height: undefined, // preserve aspect ratio
+      },
+    ],
+    // Falls back to original if a requested size doesn't apply (e.g. non-image files like .glb)
+  },
 }
