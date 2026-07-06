@@ -1,3 +1,4 @@
+import { seoPlugin } from '@payloadcms/plugin-seo'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
@@ -9,7 +10,8 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Customers } from './collections/Customers'
 import { Products } from './collections/Products'
-
+import { Categories } from './collections/Categories'
+import { Orders } from './collections/Orders'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -20,7 +22,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Customers, Products],
+  collections: [Users, Media, Customers, Products, Categories, Orders],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -32,5 +34,12 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    seoPlugin({
+      collections: ['products'],
+      uploadsCollection: 'media',
+      generateTitle: ({ doc }) => `${doc?.name ?? 'Product'} | OnyxTech`,
+      generateDescription: ({ doc }) => doc?.description ?? '',
+    }),
+  ],
 })

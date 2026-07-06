@@ -94,11 +94,20 @@ export const Customers: CollectionConfig = {
     {
       name: 'wishlist',
       type: 'relationship',
-      relationTo: 'products', // Will exist once we build the Products collection
+      relationTo: 'products',
       hasMany: true,
       required: false,
       admin: {
         description: 'Products saved by the customer for later',
+      },
+    },
+    {
+      name: 'orders',
+      type: 'join',
+      collection: 'orders',
+      on: 'customer',
+      admin: {
+        description: 'Read-only reverse lookup — orders placed by this customer',
       },
     },
   ],

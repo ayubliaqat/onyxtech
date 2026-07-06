@@ -54,16 +54,10 @@ export const Products: CollectionConfig = {
             },
             {
               name: 'category',
-              type: 'select',
+              type: 'relationship',
+              relationTo: 'categories',
               required: true,
-              options: [
-                { label: 'Cables', value: 'cables' },
-                { label: 'Chargers', value: 'chargers' },
-                { label: 'Earbuds & Headphones', value: 'audio' },
-                { label: 'Cases & Covers', value: 'cases' },
-                { label: 'Power Banks', value: 'power-banks' },
-                { label: 'Other Accessories', value: 'other' },
-              ],
+              hasMany: false,
             },
             {
               name: 'brand',

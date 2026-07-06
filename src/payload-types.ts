@@ -72,17 +72,25 @@ export interface Config {
     media: Media;
     customers: Customer;
     products: Product;
+    categories: Category;
+    orders: Order;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    customers: {
+      orders: 'orders';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     customers: CustomersSelect<false> | CustomersSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    orders: OrdersSelect<false> | OrdersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -238,6 +246,14 @@ export interface Customer {
    * Products saved by the customer for later
    */
   wishlist?: (number | Product)[] | null;
+  /**
+   * Read-only reverse lookup — orders placed by this customer
+   */
+  orders?: {
+    docs?: (number | Order)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -269,7 +285,7 @@ export interface Product {
    */
   slug?: string | null;
   description: string;
-  category: 'cables' | 'chargers' | 'audio' | 'cases' | 'power-banks' | 'other';
+  category: number | Category;
   brand?: string | null;
   /**
    * Base price in your store currency
@@ -321,6 +337,78 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  name: string;
+  /**
+   * Auto-generated from name, editable if needed
+   */
+  slug?: string | null;
+  /**
+   * Optional intro text shown on the category landing page
+   */
+  description?: string | null;
+  image?: (number | null) | Media;
+  /**
+   * Controls display order on the storefront (lower numbers first)
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders".
+ */
+export interface Order {
+  id: number;
+  /**
+   * Auto-generated, e.g. ONX-00001
+   */
+  orderNumber: string;
+  customer: number | Customer;
+  items: {
+    product: number | Product;
+    /**
+     * e.g. "Midnight Black" — snapshot of the variant chosen, if any
+     */
+    variantLabel?: string | null;
+    quantity: number;
+    /**
+     * Snapshot of the price at time of purchase (prices may change later)
+     */
+    priceAtOrder: number;
+    id?: string | null;
+  }[];
+  subtotal: number;
+  shipping: number;
+  tax: number;
+  total: number;
+  shippingAddress: {
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+    country: string;
+  };
+  status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
+  paymentStatus: 'unpaid' | 'paid' | 'refunded';
+  stripePaymentIntentId?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -363,6 +451,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'products';
         value: number | Product;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'orders';
+        value: number | Order;
       } | null);
   globalSlug?: string | null;
   user:
@@ -511,6 +607,7 @@ export interface CustomersSelect<T extends boolean = true> {
         id?: T;
       };
   wishlist?: T;
+  orders?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -567,6 +664,61 @@ export interface ProductsSelect<T extends boolean = true> {
         value?: T;
         id?: T;
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  description?: T;
+  image?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders_select".
+ */
+export interface OrdersSelect<T extends boolean = true> {
+  orderNumber?: T;
+  customer?: T;
+  items?:
+    | T
+    | {
+        product?: T;
+        variantLabel?: T;
+        quantity?: T;
+        priceAtOrder?: T;
+        id?: T;
+      };
+  subtotal?: T;
+  shipping?: T;
+  tax?: T;
+  total?: T;
+  shippingAddress?:
+    | T
+    | {
+        street?: T;
+        city?: T;
+        state?: T;
+        zip?: T;
+        country?: T;
+      };
+  status?: T;
+  paymentStatus?: T;
+  stripePaymentIntentId?: T;
   updatedAt?: T;
   createdAt?: T;
 }
