@@ -30,8 +30,7 @@ export const Media: CollectionConfig = {
       },
       {
         name: 'hero',
-        width: 1600,
-        height: undefined, // preserve aspect ratio
+        width: 1600, // preserve aspect ratio
       },
     ],
     // Falls back to original if a requested size doesn't apply (e.g. non-image files like .glb)
