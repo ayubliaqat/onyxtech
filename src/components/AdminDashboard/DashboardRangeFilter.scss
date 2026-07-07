@@ -1,0 +1,84 @@
+.onyx-range-filter {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 4px 0 20px;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  &__select,
+  &__date {
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    color-scheme: dark;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #7c9eff;
+      box-shadow: 0 0 0 3px rgba(124, 158, 255, 0.25);
+      background: rgba(124, 158, 255, 0.08);
+    }
+  }
+
+  // Styles the actual dropdown option list where supported
+  &__select option {
+    background: #1a1a1a;
+    color: #fff;
+
+    &:checked,
+    &:hover {
+      background: #7c9eff;
+      color: #fff;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: 8px;
+    margin-left: 4px;
+  }
+
+  &__nav-btn {
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background: rgba(124, 158, 255, 0.12);
+      border-color: rgba(124, 158, 255, 0.4);
+      color: #fff;
+    }
+
+    &:active {
+      background: rgba(124, 158, 255, 0.2);
+    }
+  }
+}

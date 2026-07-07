@@ -1,0 +1,103 @@
+.onyx-dashboard {
+  background: #0B1220;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  font-family: 'Inter', sans-serif;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    h2 {
+      color: #FFFFFF;
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0;
+    }
+  }
+
+  &__subtitle {
+    color: #8B94A7;
+    font-size: 13px;
+    margin: 2px 0 0;
+  }
+
+  &__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  &__charts {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 12px;
+  }
+}
+
+.onyx-metric-card {
+  background: #111A2E;
+  border: 0.5px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__label {
+    font-size: 12px;
+    color: #8B94A7;
+  }
+
+  &__value {
+    font-size: 22px;
+    font-weight: 500;
+    color: #FFFFFF;
+  }
+
+  &--warning &__value {
+    color: #EFB85F;
+  }
+}
+
+.onyx-chart-card {
+  background: #111A2E;
+  border: 0.5px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 16px;
+
+  &__title {
+    display: block;
+    font-size: 13px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+  }
+}
+
+.onyx-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-top: 10px;
+  font-size: 11px;
+  color: #8B94A7;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+  .onyx-dashboard__filter-row {
+  margin: 16px 0;
+}
+}

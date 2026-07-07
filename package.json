@@ -23,6 +23,8 @@
     "@payloadcms/plugin-seo": "^3.85.2",
     "@payloadcms/richtext-lexical": "3.85.2",
     "@payloadcms/ui": "3.85.2",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",
@@ -30,7 +32,9 @@
     "payload": "3.85.2",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "sharp": "0.34.2"
+    "recharts": "^3.9.2",
+    "sharp": "0.34.2",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@playwright/test": "1.58.2",
@@ -38,6 +42,7 @@
     "@types/node": "22.19.9",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "@types/three": "^0.185.0",
     "@vitejs/plugin-react": "4.5.2",
     "eslint": "^9.16.0",
     "eslint-config-next": "16.2.6",

@@ -1,0 +1,194 @@
+/**
+ * OnyxTech Payload Admin Theme
+ * Overrides Payload's own CSS custom properties to restyle the real
+ * admin shell (sidebar, nav, top bar) — not a bolt-on panel.
+ * Import this in src/app/(payload)/layout.tsx
+ */
+
+:root {
+  /* Payload's elevation scale controls sidebar/panel backgrounds */
+  --theme-elevation-0: #0B1220;
+  --theme-elevation-50: #0D1526;
+  --theme-elevation-100: #111A2E;
+  --theme-elevation-150: #16213A;
+  --theme-elevation-200: #1B2745;
+  --theme-elevation-500: #8B94A7;
+  --theme-elevation-800: #E4E9F0;
+  --theme-elevation-900: #F5F7FA;
+  --theme-elevation-1000: #FFFFFF;
+
+  /* Base page + text */
+  --theme-bg: #0B1220;
+  --theme-input-bg: #111A2E;
+  --theme-text: #FFFFFF;
+
+  /* Accent (Payload uses this for active nav items, primary buttons, links) */
+  --theme-success-500: #5DCAA5;
+  --theme-warning-500: #EF9F27;
+  --theme-error-500: #E24B4A;
+
+  --brand-color: #3D7FFF;
+}
+
+/* Sidebar (nav) — force the deep navy panel look */
+.nav {
+  background: #111A2E !important;
+  border-right: 0.5px solid rgba(255, 255, 255, 0.06);
+}
+
+.nav__link,
+.nav-group__label {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.nav__link--active,
+.nav__link:hover {
+  color: #6FA3FF !important;
+  background: rgba(61, 127, 255, 0.14) !important;
+  border-radius: 8px;
+}
+
+/* Logo area at the top of the sidebar */
+.nav-toggler,
+.app-header {
+  background: #111A2E !important;
+}
+
+/* Top bar / step nav */
+.step-nav {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Primary buttons use the OnyxTech accent blue instead of Payload's default */
+.btn--style-primary {
+  background: #3D7FFF !important;
+  border-color: #3D7FFF !important;
+}
+
+.btn--style-primary:hover {
+  background: #2E6EE0 !important;
+}
+
+/* ============================
+   Sidebar — group structure & active state
+   ============================ */
+
+/* Group labels (Collections / Storefront / Catalog) — quiet structural dividers */
+.nav-group__label {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.35) !important;
+  padding: 20px 16px 6px !important;
+}
+
+/* Give the first group less top padding so it doesn't float from the logo */
+.nav-group:first-of-type .nav-group__label {
+  padding-top: 12px !important;
+}
+
+/* Nav links — spacing + left accent bar on active, not just a background fill */
+.nav__link {
+  position: relative;
+  padding: 8px 14px !important;
+  margin: 2px 8px !important;
+  font-size: 13.5px !important;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav__link--active {
+  font-weight: 600 !important;
+}
+
+.nav__link--active::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: #3D7FFF;
+  border-radius: 0 2px 2px 0;
+}
+
+/* Sidebar scrollbar — thin, matches theme instead of default browser gray */
+.nav::-webkit-scrollbar {
+  width: 6px;
+}
+.nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+/* ============================
+   Collections list view (table pages)
+   ============================ */
+
+/* Page header row: title + "Create new" button */
+.collection-list__header,
+.list-header {
+  padding: 24px 0 16px !important;
+}
+
+.list-header__title,
+.collection-list h1 {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: #FFFFFF !important;
+}
+
+/* Table container — glass card instead of flat default */
+.table {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.table table thead tr {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.table table thead th {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  padding: 12px 16px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.table table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+  transition: background 0.15s ease;
+}
+
+.table table tbody tr:hover {
+  background: rgba(61, 127, 255, 0.06) !important;
+}
+
+.table table tbody td {
+  padding: 12px 16px !important;
+  font-size: 13.5px !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Row links (e.g. product/category names) pick up the accent on hover */
+.table table tbody td a {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.table table tbody td a:hover {
+  color: #6FA3FF !important;
+}
+
+/* Search bar + filter controls above the table */
+.list-controls,
+.search-filter {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 10px !important;
+}

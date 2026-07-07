@@ -18,6 +18,9 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     user: Users.slug,
+    components: {
+      beforeDashboard: ['/components/AdminDashboard/AdminDashboardOverview#AdminDashboardOverview'],
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },
