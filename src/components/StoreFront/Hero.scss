@@ -1,0 +1,105 @@
+.onyx-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px 60px;
+  background: #FAFAF9;
+  overflow: hidden;
+  text-align: center;
+
+  &__content {
+    max-width: 620px;
+    z-index: 2;
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0071E3;
+    margin-bottom: 16px;
+  }
+
+  &__headline {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: #1D1D1F;
+    margin: 0 0 20px;
+  }
+
+  &__subhead {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #6E6E73;
+    max-width: 480px;
+    margin: 0 auto 36px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__stage {
+    width: 100%;
+    max-width: 560px;
+    height: 480px;
+    margin-top: 20px;
+    z-index: 1;
+  }
+}
+
+.onyx-hero-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.onyx-btn {
+  padding: 14px 28px;
+  border-radius: 980px; // Apple-style full pill
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+
+  &--primary {
+    background: #0071E3;
+    color: #fff;
+
+    &:hover {
+      background: #0077ED;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0, 113, 227, 0.25);
+    }
+  }
+
+  &--ghost {
+    color: #0071E3;
+    background: transparent;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .onyx-hero {
+    padding: 100px 20px 40px;
+
+    &__stage {
+      height: 340px;
+    }
+  }
+}
